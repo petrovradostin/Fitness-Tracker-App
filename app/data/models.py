@@ -17,6 +17,6 @@ class Workout(Base):
     sets = Column(Integer)
     reps = Column(Integer)
     weight = Column(Float)
-    date_posted = Column(DateTime, default=datetime.utcnow)
+    date_posted = Column(DateTime, default=datetime.now)
     owner_id = Column(Integer, ForeignKey('user.id'))
     owner = relationship("User", back_populates="workouts")

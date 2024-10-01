@@ -18,7 +18,7 @@ class Workout(WorkoutBase):
     date_posted: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserBase(BaseModel):
     username: str
@@ -32,4 +32,4 @@ class User(UserBase):
     workouts: List[Workout] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
