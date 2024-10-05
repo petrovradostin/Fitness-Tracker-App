@@ -25,11 +25,20 @@ class UserBase(BaseModel):
     email: str
 
 class UserCreate(UserBase):
+    username: str
+    email: str
     password: str
 
 class User(UserBase):
     id: int
     workouts: List[Workout] = []
+
+    class Config:
+        from_attributes = True
+
+class UserResponse(BaseModel):
+    username: str
+    email: str
 
     class Config:
         from_attributes = True
