@@ -1,7 +1,15 @@
+from typing import Optional
 from sqlalchemy.orm import Session
 from data.models import User
 from data.schemas import UserCreate
 from data.security import get_password_hash
+
+def all(db: Session, username: str) -> Optional[User]:
+    if username is None:
+        return db.query(User).all()
+    else:
+        return db.query(User).filter(User.username == username).first()
+
 
 def get_user_by_id(db: Session, user_id: int):
     return db.query(User).filter(User.id == user_id).first()

@@ -1,3 +1,4 @@
+from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from data import schemas
@@ -14,6 +15,17 @@ def get_db():
         yield db
     finally:
         db.close()
+
+@users_router.get("/", response_model=List[schemas.UserResponse])
+def get_users(username: Optional[str] = None, db: Session = Depends(get_db)):
+    if username:
+        user = users_service.all(db, username)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return [user]
+    users = users_service.all(db, username)
+    return users
+
 
 @users_router.get("/{user_id}", response_model=schemas.UserResponse)
 def get_user(user_id: int, db: Session = Depends(get_db)):
