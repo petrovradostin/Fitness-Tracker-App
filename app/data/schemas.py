@@ -3,22 +3,30 @@ from typing import List, Optional
 from datetime import datetime
 
 class WorkoutBase(BaseModel):
-    exercise: str
-    duration: int
-    sets: Optional[int] = None
-    reps: Optional[int] = None
-    weight: Optional[float] = None
+    name: str
+    description: str
 
 class WorkoutCreate(WorkoutBase):
-    pass
+    name: str
+    description: str
 
 class Workout(WorkoutBase):
     id: int
-    owner_id: int
+    user_id: int
     date_posted: datetime
 
     class Config:
         from_attributes = True
+
+class WorkoutResponse(BaseModel):
+    id: int
+    name: str
+    description: str
+
+    class Config:
+        from_attributes = True
+
+
 
 class UserBase(BaseModel):
     username: str
