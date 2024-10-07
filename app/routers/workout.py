@@ -23,3 +23,10 @@ def create_workout(workout: schemas.WorkoutCreate, db: Session = Depends(get_db)
 @workouts_router.get("/", response_model=List[schemas.Workout])
 def get_workouts(db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
     return workouts_service.get_user_workouts(db=db, user_id=current_user.id)
+
+@workouts_router.get("/workout", response_model=List[schemas.Workout])
+def get_workout(name: str, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
+    workout = workouts_service.get_workout_by_name(db, name=name, user_id=current_user.id)
+    if not workout:
+        raise HTTPException(status_code=404, detail="Workout not found")
+    return workout

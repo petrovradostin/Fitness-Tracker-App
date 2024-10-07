@@ -11,5 +11,10 @@ def create_workout(db: Session, workout: schemas.WorkoutCreate, user_id: int):
     db.refresh(db_workout)
     return db_workout
 
+
 def get_user_workouts(db: Session, user_id: int):
     return db.query(models.Workout).filter(models.Workout.user_id == user_id).all()
+
+
+def get_workout_by_name(db: Session, name: str, user_id: int):
+    return db.query(models.Workout).filter(models.Workout.name == name, models.Workout.user_id == user_id).all()
