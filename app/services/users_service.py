@@ -1,26 +1,26 @@
 from typing import Optional
 from sqlalchemy.orm import Session
-from data.models import User
-from data.schemas import UserCreate
+from data import models
+from data import schemas
 from data.security import get_password_hash
 
-def all(db: Session, username: str) -> Optional[User]:
+def all(db: Session, username: str) -> Optional[models.User]:
     if username is None:
-        return db.query(User).all()
+        return db.query(models.User).all()
     else:
-        return db.query(User).filter(User.username == username).first()
+        return db.query(models.User).filter(models.User.username == username).first()
 
 
 def get_user_by_id(db: Session, user_id: int):
-    return db.query(User).filter(User.id == user_id).first()
+    return db.query(models.User).filter(models.User.id == user_id).first()
 
-def create_user(db: Session, user: UserCreate):
+def create_user(db: Session, user: schemas.UserCreate):
     hashed_password = get_password_hash(user.password)
-    db_user = User(username=user.username, email=user.email, hashed_password=hashed_password)
+    db_user = models.User(username=user.username, email=user.email, hashed_password=hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
 def get_user_by_email(db: Session, email: str):
-    return db.query(User).filter(User.email == email).first()
+    return db.query(models.User).filter(models.User.email == email).first()

@@ -50,3 +50,40 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+
+class MuscleGroup(BaseModel):
+    name: str
+
+    class Config:
+        from_attributes = True
+
+
+class ExerciseCreate(BaseModel):
+    name: str
+    muscle_group_id: int
+
+class Exercise(BaseModel):
+    name: str
+
+    class Config:
+        from_atributes = True
+
+
+
+class Sets(BaseModel):
+    set_number: int
+
+    class Config:
+        from_atributes = True
+
+
+
+class Reps(BaseModel):
+    reps: int
+    weight: float
+
+    class Config:
+        from_atributes = True
+    
