@@ -72,13 +72,22 @@ class Exercise(BaseModel):
 
 
 
-class Sets(BaseModel):
+class SetCreate(BaseModel):
+    set_number: int
+    exercise_id: int
+
+class Set(BaseModel):
     set_number: int
 
     class Config:
         from_atributes = True
 
 
+
+class RepsCreate(BaseModel):
+    reps: int
+    weight: float
+    set_id:int
 
 class Reps(BaseModel):
     reps: int

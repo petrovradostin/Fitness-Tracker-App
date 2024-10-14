@@ -56,7 +56,7 @@ class MuscleGroup(Base):
     exercises = relationship("Exercise", back_populates="muscle_group")
 
 
-# Exercise Table: An exercise targets one muscle group, and it can be part of many sets
+# Exercise Table: An exercise targets one muscle group, and it can be part of many set
 class Exercise(Base):
     __tablename__ = "exercise"
 
@@ -69,13 +69,13 @@ class Exercise(Base):
     # Relationship back to MuscleGroup
     muscle_group = relationship("MuscleGroup", back_populates="exercises")
 
-    # One-to-many relationship with Sets
-    sets = relationship("Sets", back_populates="exercise")
+    # One-to-many relationship with Set
+    set = relationship("Set", back_populates="exercise")
 
 
-# Sets Table: A set contains multiple reps for an exercise
-class Sets(Base):
-    __tablename__ = "sets"
+# Set Table: A set contains multiple reps for an exercise
+class Set(Base):
+    __tablename__ = "set"
     
     id = Column(Integer, primary_key=True, index=True)
     set_number = Column(Integer, index=True)
@@ -84,7 +84,7 @@ class Sets(Base):
     exercise_id = Column(Integer, ForeignKey('exercise.id'))
     
     # Relationship back to Exercise
-    exercise = relationship("Exercise", back_populates="sets")
+    exercise = relationship("Exercise", back_populates="set")
 
     # One-to-many relationship with Reps
     reps = relationship("Reps", back_populates="set")
@@ -99,7 +99,7 @@ class Reps(Base):
     weight = Column(Float, nullable=False)
 
     # Foreign key to reference the Set it belongs to
-    set_id = Column(Integer, ForeignKey('sets.id'))
+    set_id = Column(Integer, ForeignKey('set.id'))
 
-    # Relationship back to Sets
-    set = relationship("Sets", back_populates="reps")
+    # Relationship back to Set
+    set = relationship("Set", back_populates="reps")

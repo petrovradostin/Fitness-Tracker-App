@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
 from data import models
 from data import schemas
-def create_muscle_group(db: Session, muscle_group = schemas.MuscleGroup):
+
+def create_muscle_group(db: Session, muscle_group: schemas.MuscleGroup):
     muscle_group = models.MuscleGroup(name=muscle_group.name)
     db.add(muscle_group)
     db.commit()
