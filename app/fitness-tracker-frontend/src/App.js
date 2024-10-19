@@ -1,12 +1,13 @@
 import React from 'react';
+import WorkoutList from './components/WorkoutList'; 
 
 const App = () => {
-    return (
-        <div>
-            <h1>Fitness Tracker</h1>
-            <p>Welcome to your Fitness Tracker app!</p>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Fitness Tracker App</h1>
+      <WorkoutList /> {/* Render the WorkoutList component */}
+    </div>
+  );
 };
 
 export default App;

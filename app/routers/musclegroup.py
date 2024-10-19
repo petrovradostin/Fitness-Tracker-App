@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.data import schemas
+from data import schemas
 from services import musclegroups_service
 from data import database
 
